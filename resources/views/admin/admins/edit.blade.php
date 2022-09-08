@@ -28,6 +28,14 @@
         <div class="text-danger mb-3">{{ $message }}</div>
         @enderror
 
+        <div class="form-group mb-1">
+            <label for="exampleInputEmail">Role</label>
+            {!! Form::select('roles[]', $roles,$adminRole, array('class' => 'form-control','multiple')) !!}
+        </div>
+        @error('Role')
+        <div class="text-danger mb-3">{{ $message }}</div>
+        @enderror
+
 
             <button type="submit" class="btn btn-primary mt-3 mb-3">{{__('admin.edit')}}</button>
 

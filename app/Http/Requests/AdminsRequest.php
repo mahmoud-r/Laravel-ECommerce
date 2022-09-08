@@ -18,7 +18,7 @@ class AdminsRequest extends FormRequest
             'name'=>'required|',
             'email'=>'required|unique:admins',
             'password'=>'required|',
-
+            'roles' => 'required'
         ];
     }
 }

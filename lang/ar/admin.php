@@ -22,5 +22,15 @@ return [
     'edit_is_complete' => 'تم التعديل بنجاح',
     'delete_is_complete' => 'تم الحذف بنجاح',
     'next' => 'التالي',
+    'Show' => 'عرض',
+    'Edit' => 'تعديل',
+    'delete' => 'حذف',
+    'Role_Management' => 'إدارة الادوار ',
+    'Create_New_Role' => 'إنشاء دور جديد',
+    'Back' => 'عوده',
+    'Permission' => 'الأذونات',
+    'roles' => 'الادوار',
+
+
 
 ];

@@ -39,6 +39,12 @@
                                 <p>{{__('admin.admins_show')}}</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('roles.index')}}" class="nav-link active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('admin.roles')}}</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

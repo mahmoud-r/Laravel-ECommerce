@@ -23,4 +23,15 @@ return [
     'edit_is_complete' => 'Edit is compleate',
     'delete_is_complete' => 'delete is compleate',
     'next' => 'next',
+    'Show' => 'Show',
+    'Edit' => 'Edit',
+    'delete' => 'delete',
+    'Role_Management' => 'Role Management',
+    'Create_New_Role' => 'New Role',
+    'Back' => 'Back',
+    'Permission' => 'Permission',
+    'roles' => 'Roles',
+
+
+
 ];

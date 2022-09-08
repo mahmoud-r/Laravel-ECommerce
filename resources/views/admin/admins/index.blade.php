@@ -29,6 +29,7 @@
                                     <th>#</th>
                                     <th>{{__('admin.name')}}</th>
                                     <th>{{__('admin.email')}}</th>
+                                    <th></th>
                                     <th>{{__('admin.action')}}</th>
                                 </tr>
                                 </thead>
@@ -36,9 +37,16 @@
 
                                     @foreach($admins as $admin)
                                         <tr>
-                                        <td>{{$admin->id}}</td>
+                                        <td>{{ $admin->id }}</td>
                                         <td>{{$admin->name}}</td>
                                         <td>{{$admin->email}}</td>
+                                            <td>
+                                                @if(!empty($admin->getRoleNames()))
+                                                    @foreach($admin->getRoleNames() as $v)
+                                                        <label class="badge badge-success">{{ $v }}</label>
+                                                    @endforeach
+                                                @endif
+                                            </td>
                                         <td>
                                             <a href="{{route('admin.edit',$admin->id)}}" class="btn btn-info btn-sm"> <i class="fas fa-pencil-alt"></i> </a>
                                             <form action="{{route('admin.destroy',$admin->id)}}" method="post" class="d-inline">

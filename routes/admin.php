@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\adminauthController;
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\RoleController;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -31,9 +32,15 @@ Route::group([
     });
 
 
+
+
     Route::middleware('admin:admin')->group(function (){
         Route::resource('admin',AdminController::class);
         Route::any('logout',[adminauthController::class,'logout'])->name('logout');
+
+
+        Route::resource('roles', RoleController::class);
+
     });
 
 });

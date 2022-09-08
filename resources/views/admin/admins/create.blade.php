@@ -32,6 +32,8 @@
                     @error('password')
                     <div class="text-danger mb-3">{{ $message }}</div>
                     @enderror
+                    <strong>Role:</strong>
+                    {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('admin.Close')}}</button>
                         <button type="submit" class="btn btn-primary">{{__('admin.add')}}</button>
