@@ -9,17 +9,14 @@
 
 
 
-
 <!-- jQuery -->
 <script src="{{URL('design/admin')}}/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="{{URL('design/admin')}}/plugins/jquery-ui/jquery-ui.min.js"></script>
+{{--<!-- jQuery UI 1.11.4 -->--}}
+{{--<script src="{{URL('design/admin')}}/plugins/jquery-ui/jquery-ui.min.js"></script>  --}}
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
-<!-- Bootstrap 4 rtl -->
-<script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="{{URL('design/admin')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
@@ -28,7 +25,7 @@
 <script src="{{URL('design/admin')}}/plugins/sparklines/sparkline.js"></script>
 <!-- JQVMap -->
 <script src="{{URL('design/admin')}}/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="{{URL('design/admin')}}/plugins/jqvmap/maps/jquery.vmap.world.js"></script>
+<script src="{{URL('design/admin')}}/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
 <!-- jQuery Knob Chart -->
 <script src="{{URL('design/admin')}}/plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
@@ -42,11 +39,9 @@
 <script src="{{URL('design/admin')}}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{URL('design/admin')}}/dist/js/adminlte.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{URL('design/admin')}}/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{URL('design/admin')}}/dist/js/demo.js"></script>
-
-
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{{URL('design/admin')}}/dist/js/pages/dashboard.js"></script>
 </body>
 </html>

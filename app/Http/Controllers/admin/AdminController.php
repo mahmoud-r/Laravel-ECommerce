@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\DataTables\AdminsDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AdminsRequest;
+use App\Http\Requests\StoreAdminsRequest;
 use App\Models\admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +28,7 @@ class AdminController extends Controller
     }
 
 
-    public function store(AdminsRequest $request)
+    public function store(StoreAdminsRequest $request)
     {
        $admin = admin::create([
             'name' => $request->name,

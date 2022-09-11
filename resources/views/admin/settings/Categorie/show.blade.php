@@ -4,22 +4,30 @@
 @extends('admin.layouts.master')
 
 @section('tittle')
-    {{__('admin.admins_show')}}
+    {{__('admin.sub_categories')}} : {{$categories->name}}
 @endsection
 
 @section('page')
-    {{__('admin.admins_show')}}
+    {{__('admin.categories')}}
 @endsection
 
 
 @section('content')
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+
+            <div class="pull-right mb-3">
+                <a class="btn btn-primary" href="{{ route('categorie.index')}}"> {{__('admin.Back')}}</a>
+            </div>
+        </div>
+    </div>
     <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <button type="button" class="btn btn-block btn-primary w-25 "data-toggle="modal" data-target="#exampleModalCenter">{{__('admin.add')}}</button>
+                            <button type="button" class="btn btn-block btn-primary w-25 "data-toggle="modal" data-target="#addcategorie">{{__('admin.add')}}</button>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -28,36 +36,28 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{__('admin.name')}}</th>
-                                    <th>{{__('admin.email')}}</th>
-                                    <th></th>
                                     <th>{{__('admin.action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach($admins as $admin)
-                                        <tr>
-                                        <td>{{ $admin->id }}</td>
-                                        <td>{{$admin->name}}</td>
-                                        <td>{{$admin->email}}</td>
-                                            <td>
-                                                @if(!empty($admin->getRoleNames()))
-                                                    @foreach($admin->getRoleNames() as $v)
-                                                        <label class="badge badge-success">{{ $v }}</label>
-                                                    @endforeach
-                                                @endif
-                                            </td>
+                                @foreach($sub_Categories as $sub_Categorie)
+                                    <tr>
+                                        <td>{{ $sub_Categorie->id }}</td>
+                                        <td>{{$sub_Categorie->name}}</td>
+
                                         <td>
-                                            <a href="{{route('admin.edit',$admin->id)}}" class="btn btn-info btn-sm"> <i class="fas fa-pencil-alt"></i> </a>
-                                            <form action="{{route('admin.destroy',$admin->id)}}" method="post" class="d-inline">
+                                            <a href="{{route('sub_categories.edit',$sub_Categorie->id)}}" class="btn btn-info btn-sm"> {{__('admin.Edit')}}</a>
+
+                                            <form action="{{route('sub_categories.delete',$sub_Categorie->id)}}" method="post" class="d-inline">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="btn btn-danger btn-sm "> <i class="fas fa-trash"></i></button>
+                                                <button type="submit" class="btn btn-danger btn-sm "> {{__('admin.delete')}}</button>
                                             </form>
 
                                         </td>
-                                        </tr>
-                                    @endforeach
+                                    </tr>
+                                @endforeach
 
                                 </tbody>
 
@@ -72,17 +72,17 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        @include('admin.admins.create')
+
     </section>
 @endsection
-
+@include('admin.settings.Categorie.create_sub_categore')
 @section('script')
     @include('admin.layouts.datatable.datatable_js')
     <script>
         $(function () {
             $("#example1").DataTable({
                 // "responsive": true, "lengthChange": false, "autoWidth": false,
-                // "buttons": ["copy", "excel", "pdf", "print", "colvis"],
+
                 "language": {
                     "decimal":        "",
                     "emptyTable":     "{{__('datatable.no_data')}}",

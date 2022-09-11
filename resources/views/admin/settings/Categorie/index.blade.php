@@ -4,11 +4,11 @@
 @extends('admin.layouts.master')
 
 @section('tittle')
-    {{__('admin.admins_show')}}
+     {{__('admin.categories')}}
 @endsection
 
 @section('page')
-    {{__('admin.admins_show')}}
+    {{__('admin.categories')}}
 @endsection
 
 
@@ -19,7 +19,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <button type="button" class="btn btn-block btn-primary w-25 "data-toggle="modal" data-target="#exampleModalCenter">{{__('admin.add')}}</button>
+                            <button type="button" class="btn btn-block btn-primary w-25 "data-toggle="modal" data-target="#addcategorie">{{__('admin.add')}}</button>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -28,31 +28,35 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{__('admin.name')}}</th>
-                                    <th>{{__('admin.email')}}</th>
-                                    <th></th>
+                                    <th>{{__('admin.Image')}}</th>
+                                    <th>{{__('admin.description')}}</th>
                                     <th>{{__('admin.action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach($admins as $admin)
+                                    @foreach($categories as $i =>$categorie)
                                         <tr>
-                                        <td>{{ $admin->id }}</td>
-                                        <td>{{$admin->name}}</td>
-                                        <td>{{$admin->email}}</td>
-                                            <td>
-                                                @if(!empty($admin->getRoleNames()))
-                                                    @foreach($admin->getRoleNames() as $v)
-                                                        <label class="badge badge-success">{{ $v }}</label>
-                                                    @endforeach
-                                                @endif
-                                            </td>
+                                        <td>{{++$i}}</td>
+                                        <td>{{$categorie->name}}</td>
                                         <td>
-                                            <a href="{{route('admin.edit',$admin->id)}}" class="btn btn-info btn-sm"> <i class="fas fa-pencil-alt"></i> </a>
-                                            <form action="{{route('admin.destroy',$admin->id)}}" method="post" class="d-inline">
+                                            @if(!empty($categorie->image))
+
+                                                <img src="{{URL('images/categorie').'/'.$categorie->image}}" height="50px">
+                                            @else
+                                                not image
+                                            @endif
+                                        </td>
+                                        <td>{{$categorie->description}}</td>
+                                        <td>
+                                            <a class="btn btn-info btn-sm" href="{{ route('categorie.show',$categorie->id) }}">{{__('admin.sub_categories')}}</a>
+
+                                            <a href="{{route('categorie.edit',$categorie->id)}}" class="btn btn-info btn-sm"> {{__('admin.Edit')}}</a>
+
+                                            <form action="{{route('categorie.destroy',$categorie->id)}}" method="post" class="d-inline">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="btn btn-danger btn-sm "> <i class="fas fa-trash"></i></button>
+                                                <button type="submit" class="btn btn-danger btn-sm "> {{__('admin.delete')}}</button>
                                             </form>
 
                                         </td>
@@ -72,17 +76,16 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        @include('admin.admins.create')
+
     </section>
 @endsection
-
+        @include('admin.settings.Categorie.create')
 @section('script')
     @include('admin.layouts.datatable.datatable_js')
     <script>
         $(function () {
             $("#example1").DataTable({
-                // "responsive": true, "lengthChange": false, "autoWidth": false,
-                // "buttons": ["copy", "excel", "pdf", "print", "colvis"],
+                "responsive": true, "lengthChange": true, "autoWidth": false,
                 "language": {
                     "decimal":        "",
                     "emptyTable":     "{{__('datatable.no_data')}}",
