@@ -62,17 +62,29 @@
 
                                  <div class="form-group">
                                     <label for="productname">{{__('admin.price')}} </label>
-                                    <input type="number" name="price" value="{{ old('price')}}"  class="form-control" id="productname" placeholder="{{__('admin.price')}}" @error('name') is-invalid @enderror >
+                                    <input type="number" name="price" value="{{ old('price')}}"  class="form-control" id="productname" placeholder="{{__('admin.price')}}" @error('price') is-invalid @enderror >
                                     @error('price')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-
-
-
+                                 <div class="form-group">
+                                    <label for="productname">{{__('admin.old_price')}} </label>
+                                    <input type="number" name="old_price" value="{{ old('old_price')}}"  class="form-control" id="old_price" placeholder="{{__('admin.old_price')}}" @error('old_price') is-invalid @enderror >
+                                    @error('old_price')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
                             </div>
                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="productname_ar">{{__('admin.product_name_ar')}} </label>
+                                    <input type="text" name="name_ar" class="form-control" id="productname_ar" value="{{ old('name_ar')}}" placeholder="{{__('admin.product_name_ar')}}" @error('name_ar') is-invalid @enderror >
+                                    @error('name_ar')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
                                 <div class="form-group">
                                     <label>{{__('admin.categories')}}</label>
                                     <select class="form-control select2bs4" name="Categorie_id"   id="Categorie" style="width: 100%;" @error('Categorie_id') is-invalid @enderror >
@@ -90,7 +102,6 @@
                                     @enderror
                                 </div>
 
-
                                 <div class="form-group">
                                     <label>{{__('admin.sub_categories')}}</label>
                                     <select class="form-control select2bs4" name="sub_Categorie_id"
@@ -103,7 +114,6 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-
                                 <div class="form-group">
                                     <label>{{__('admin.brand')}}</label>
                                     <select class="form-control select2bs4" name="brand_id"  style="width: 100%;" @error('brand_id') is-invalid @enderror >
@@ -121,13 +131,42 @@
                                     @enderror
                                 </div>
 
+                            </div>
+                            <div class="col-md-6">
+                                <label>{{__('admin.short_description')}}</label>
 
+                                <textarea id="short_description" name="short_description" @error('short_description') is-invalid @enderror >
+                                     {!! old('short_description') !!}
+                                  </textarea>
+                                @error('short_description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>{{__('admin.short_description_ar')}}</label>
+
+                                <textarea id="short_description_ar" name="short_description_ar" @error('short_description_ar') is-invalid @enderror >
+                                     {!! old('short_description_ar') !!}
+                                  </textarea>
+                                @error('short_description_ar')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-12">
+                                <label>{{__('admin.description')}}</label>
                                 <textarea id="summernote" name="description" @error('brand_id') is-invalid @enderror >
-                                     {{old('description')}}
+                                  {!! old('description') !!}
                                   </textarea>
                                 @error('description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <label>{{__('admin.description_ar')}}</label>
+                                <textarea id="description_ar" name="description" @error('description_ar') is-invalid @enderror >
+                                 {!! old('description_ar') !!}
+                                  </textarea>
+                                @error('description_ar')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -167,6 +206,18 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group  clearfix">
+                                    <div class="icheck-primary d-inline">
+                                        <input type="checkbox" id="best_seller" name="best_seller" @error('best_seller') is-invalid @enderror  >
+                                        <label for="best_seller">
+                                            {{(__('admin.best_seller'))}}
+                                        </label>
+                                        @error('best_seller')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
 
                             </div>
 
@@ -198,7 +249,7 @@
 
                 if (categorie_id) {
                     $.ajax({
-                        url: "{{URL::to('admin/get_sub_Categorie')}}/" + categorie_id,
+                        url: "{{URL::to('control_panel/get_sub_Categorie')}}/" + categorie_id,
                         type: "GET",
                         dataType: "json",
                         success: function (data) {
@@ -226,6 +277,9 @@
 
         $(document).ready(function() {
             $('#summernote').summernote();
+            $('#short_description').summernote();
+            $('#description_ar').summernote();
+            $('#short_description_ar').summernote();
         });
 
         let uploadedDocumentMap = {};
@@ -236,14 +290,13 @@
             autoProcessQueue: true,
             uploadMultiple: true,
             addRemoveLinks: true,
-            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            acceptedFiles: ".jpeg,.jpg,.png,.gif,.webp",
             parallelUploads: 10,
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}" ,
             },
             successmultiple: function(data, response) {
                 $.each(response['name'], function (key, val) {
-                    console.log(response['name']);
                     $('form').append('<input type="hidden" name="images[]" value="' + val + '">');
                     uploadedDocumentMap[data[key].name] = val;
                 });
@@ -261,7 +314,7 @@
                 $('form').find('input[name="images[]"][value="' + name + '"]').remove()
                 $.ajax({
                     type: 'GET',
-                    url: '/admin/delete_image_by_name/'+name,
+                    url: '/control_panel/delete_image_by_name/'+name,
                     // data: {name: name},
 
                     sucess: function(data){

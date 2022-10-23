@@ -26,9 +26,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @can('Categories-create')
                         <div class="card-header">
                             <button type="button" class="btn btn-block btn-primary w-25 "data-toggle="modal" data-target="#addcategorie">{{__('admin.add')}}</button>
                         </div>
+                        @endcan
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
@@ -47,14 +49,16 @@
                                         <td>{{$sub_Categorie->name}}</td>
 
                                         <td>
+                                            @can('Categories-edit')
                                             <a href="{{route('sub_categories.edit',$sub_Categorie->id)}}" class="btn btn-info btn-sm"> {{__('admin.Edit')}}</a>
-
+                                            @endcan
+                                            @can('Categories-delete')
                                             <form action="{{route('sub_categories.delete',$sub_Categorie->id)}}" method="post" class="d-inline">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger btn-sm "> {{__('admin.delete')}}</button>
                                             </form>
-
+                                                @endcan
                                         </td>
                                     </tr>
                                 @endforeach

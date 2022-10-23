@@ -136,7 +136,7 @@
 
                                 <div class="form-group">
                                     <label for="productname">{{__('admin.product_name')}} </label>
-                                    <input type="text" name="name" class="form-control" id="productname" value="{{$product->name}}" placeholder="{{__('admin.product_name')}}" @error('name') is-invalid @enderror >
+                                    <input type="text" name="name" class="form-control" id="productname" value="{{$product->getTranslation('name' ,'en')}}" placeholder="{{__('admin.product_name')}}" @error('name') is-invalid @enderror >
                                     @error('name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
@@ -144,7 +144,7 @@
 
                                 <div class="form-group">
                                     <label for="productname">{{__('admin.quantity')}} </label>
-                                    <input type="number" name="quantity" class="form-control" id="productname" value="{{$product->quantity}}" placeholder="{{__('admin.quantity')}}" @error('name') is-invalid @enderror >
+                                    <input type="number" name="quantity" class="form-control" id="productname" value="{{$product->quantity}}" placeholder="{{__('admin.quantity')}}" @error('quantity') is-invalid @enderror >
                                     @error('quantity')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
@@ -152,8 +152,16 @@
 
                                  <div class="form-group">
                                     <label for="productname">{{__('admin.price')}} </label>
-                                    <input type="text" name="price" class="form-control" id="productname" value="{{$product->price}}" placeholder="{{__('admin.price')}}" @error('name') is-invalid @enderror >
+                                    <input type="text" name="price" class="form-control" id="productname" value="{{$product->price}}" placeholder="{{__('admin.price')}}" @error('price') is-invalid @enderror >
                                     @error('price')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                 <div class="form-group">
+                                    <label for="productname">{{__('admin.old_price')}} </label>
+                                    <input type="text" name="old_price" class="form-control" id="old_price" value="{{$product->old_price}}" placeholder="{{__('admin.old_price')}}" @error('old_price') is-invalid @enderror >
+                                    @error('old_price')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -163,6 +171,14 @@
 
                             </div>
                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="productname">{{__('admin.product_name_ar')}} </label>
+                                    <input type="text" name="name_ar" class="form-control" id="productname" value="{{$product->getTranslation('name' ,'ar')}}" placeholder="{{__('admin.product_name_ar')}}" @error('name_ar') is-invalid @enderror >
+                                    @error('name_ar')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
                                 <div class="form-group">
                                     <label>{{__('admin.categories')}}</label>
                                     <select class="form-control select2bs4" name="Categorie_id" id="Categorie" value="{{$product->Categorie_id}}" style="width: 100%;" @error('Categorie_id') is-invalid @enderror >
@@ -213,16 +229,47 @@
                                     @enderror
                                 </div>
 
+                            </div>
+                            <div class="col-md-6">
+                                <label>{{__('admin.short_description')}}</label>
 
+                                <textarea id="short_description" name="short_description"  @error('short_description') is-invalid @enderror >
+                                    {{$product->getTranslation('short_description' ,'en')}}
+                                  </textarea>
+                                @error('short_description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>{{__('admin.short_description_ar')}}</label>
+
+                                <textarea id="short_description_ar" name="short_description_ar"  @error('short_description_ar') is-invalid @enderror >
+                                    {{$product->getTranslation('short_description' ,'ar')}}
+                                  </textarea>
+                                @error('short_description_ar')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-12">
-                                <textarea id="summernote" name="description"  @error('brand_id') is-invalid @enderror >
-                                    {{$product->description}}
+                                <label>{{__('admin.description')}}</label>
+                                <textarea id="description" name="description"  @error('brand_id') is-invalid @enderror >
+                                    {{$product->getTranslation('description' ,'en')}}
                                   </textarea>
                                 @error('description')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="col-md-12">
+                                <label>{{__('admin.description_ar')}}</label>
+
+                                <textarea id="description_ar" name="description_ar"  @error('description_ar') is-invalid @enderror >
+                                    {{$product->getTranslation('description' ,'ar')}}
+                                  </textarea>
+                                @error('description_ar')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                             <div class="col-md-12">
                                 <div class="row">
                                     @foreach($product->images as $image)
@@ -279,6 +326,19 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="form-group  clearfix">
+                                    <div class="icheck-primary d-inline">
+                                        <input type="checkbox" id="best_seller"
+                                               {{$product->best_seller == 1 ? 'checked' : ''}}
+                                               name="best_seller" @error('best_seller') is-invalid @enderror  >
+                                        <label for="best_seller">
+                                            {{(__('admin.best_seller'))}}
+                                        </label>
+                                        @error('best_seller')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
 
 
                             </div>
@@ -312,7 +372,7 @@
                 var categorie_id = $('select[name="Categorie_id"]').val();
                 if (categorie_id) {
                     $.ajax({
-                        url: "{{URL::to('admin/get_sub_Categorie')}}/" + categorie_id,
+                        url: "{{URL::to('control_panel/get_sub_Categorie')}}/" + categorie_id,
                         type: "GET",
                         dataType: "json",
                         success: function (data) {
@@ -335,7 +395,7 @@
 
                 if (categorie_id) {
                     $.ajax({
-                        url: "{{URL::to('admin/get_sub_Categorie')}}/" + categorie_id,
+                        url: "{{URL::to('control_panel/get_sub_Categorie')}}/" + categorie_id,
                         type: "GET",
                         dataType: "json",
                         success: function (data) {
@@ -363,7 +423,10 @@
         })
 
         $(document).ready(function() {
-            $('#summernote').summernote();
+            $('#description').summernote();
+            $('#description_ar').summernote();
+            $('#short_description_ar').summernote();
+            $('#short_description').summernote();
         });
 
         let uploadedDocumentMap = {};
@@ -395,7 +458,7 @@
                 $('form').find('input[name="images[]"][value="' + name + '"]').remove()
                 $.ajax({
                     type: 'GET',
-                    url: '/admin/delete_image_by_name/'+name,
+                    url: '/control_panel/delete_image_by_name/'+name,
                     // data: {name: name},
 
                     sucess: function(data){
@@ -412,7 +475,7 @@
 
             $.ajax(
                 {
-                    url: "/admin/delete_image/"+ id,
+                    url: "/control_panel/delete_image/"+ id,
                     {{--url: '{{route("delete_image", $image->id)}}',--}}
                     type: 'GET',
                     data: {

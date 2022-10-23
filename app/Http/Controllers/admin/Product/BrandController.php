@@ -8,7 +8,13 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-
+    function __construct()
+    {
+        $this->middleware('permission:brand-list|brand-create|brand-edit|brand-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:brand-create', ['only' => ['create','store',]]);
+        $this->middleware('permission:brand-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:brand-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $brands = brand::get();
@@ -27,6 +33,7 @@ class BrandController extends Controller
     {
         $request->validate([
             'name'=>'required|unique:brands|max:255',
+            'name_ar'=>'required|max:255',
             'image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ]);
@@ -40,11 +47,11 @@ class BrandController extends Controller
 
 
         brand::create([
-            'name'=>$request->name,
+            'name'=>['en'=>$request->name , 'ar'=>$request->name_ar],
             'image'=>$photo,
         ]);
 
-        return redirect('admin/brand')->with(['success'=>__('admin.add_is_complete')]);
+        return redirect('control_panel/brand')->with(['success'=>__('admin.add_is_complete')]);
     }
 
 
@@ -69,6 +76,7 @@ class BrandController extends Controller
 
         $request->validate([
             'name'=>'required|max:255|unique:brands,name,'.$id,
+            'name_ar'=>'required|max:255',
             'image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ]);
@@ -82,11 +90,11 @@ class BrandController extends Controller
         }
 
         $brand->update([
-            'name'=>$request->name,
+            'name'=>['en'=>$request->name , 'ar'=>$request->name_ar],
             'image'=>$photo,
         ]);
 
-        return redirect('admin/brand')->with(['success'=>__('admin.edit_is_complete')]);
+        return redirect('control_panel/brand')->with(['success'=>__('admin.edit_is_complete')]);
     }
 
 
@@ -96,6 +104,6 @@ class BrandController extends Controller
 
         DeleteImage($brand->image ,'brand');
         $brand->delete();
-        return redirect('admin/brand')->with(['deleted'=>__('admin.delete_is_complete')]);
+        return redirect('control_panel/brand')->with(['deleted'=>__('admin.delete_is_complete')]);
     }
 }

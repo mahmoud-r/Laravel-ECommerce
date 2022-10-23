@@ -183,6 +183,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class,
+        App\Providers\SettingServiceProvider::class,
 
 
         /*
@@ -213,6 +215,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
     ])->toArray(),
 
 ];

@@ -3,7 +3,10 @@
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.2.0
+        <form method="post" action="{{ route('admin.logout') }}">
+            @csrf
+            <button type="submit" class="logout" style="border:none; background: none;  color: inherit; font: inherit;cursor: pointer;"   rel="nofollow" title="Log me out">Sign out</button>
+        </form>
     </div>
 </footer>
 
@@ -12,7 +15,7 @@
 <!-- jQuery -->
 <script src="{{URL('design/admin')}}/plugins/jquery/jquery.min.js"></script>
 {{--<!-- jQuery UI 1.11.4 -->--}}
-{{--<script src="{{URL('design/admin')}}/plugins/jquery-ui/jquery-ui.min.js"></script>  --}}
+<script src="{{URL('design/admin')}}/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button)
@@ -43,5 +46,22 @@
 <script src="{{URL('design/admin')}}/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{URL('design/admin')}}/dist/js/pages/dashboard.js"></script>
+<script>
+    /** add active class and stay opened when selected */
+    $(function (){
+        var url = window.location;
+
+        // for sidebar menu entirely but not cover treeview
+        $('ul.nav-sidebar a').filter(function() {
+            return this.href == url;
+        }).addClass('active');
+
+        // for treeview
+        $('ul.nav-treeview a').filter(function() {
+            return this.href == url;
+        }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
+    })
+
+</script>
 </body>
 </html>

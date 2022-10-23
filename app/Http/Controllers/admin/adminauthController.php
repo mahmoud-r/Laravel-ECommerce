@@ -17,7 +17,7 @@ class adminauthController extends Controller
 {
     public function Login(){
         if (Auth::guard('admin')->check()) {
-            return redirect('admin');
+            return redirect('control_panel');
         }
         return view('admin.auth.login');
     }
@@ -27,16 +27,16 @@ class adminauthController extends Controller
 
 
         if (auth()->guard('admin')->attempt(['email'=>$request->email,'password'=>$request->password],$rememberme)){
-            return redirect('admin');
+            return redirect('control_panel');
         }else{
-           return redirect('admin/login')->withErrors([session('error','__login_fild')]);
+           return redirect('control_panel/login')->withErrors([session('error','__login_fild')]);
         }
     }
 
 
     public function logout(){
         auth()->guard('admin')->logout();
-        return redirect('admin/login');
+        return redirect('control_panel/login');
     }
 
     public function form_forgot_password(){
@@ -96,7 +96,7 @@ class adminauthController extends Controller
            DB::table('password_resets')->where('email',$request->email)->delete();
 
             auth()->guard('admin')->attempt(['email'=>$data->email,'password'=>$request->password],true);
-           return redirect('admin');
+           return redirect('control_panel');
         }else{
             redirect('forot_password');
         }

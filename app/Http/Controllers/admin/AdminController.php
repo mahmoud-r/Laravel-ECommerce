@@ -13,7 +13,13 @@ use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
-
+    function __construct()
+    {
+        $this->middleware('permission:admin-list|admin-create|admin-edit|admin-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:admin-create', ['only' => ['create','store',]]);
+        $this->middleware('permission:admin-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:admin-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $admins = admin::get();
@@ -37,7 +43,7 @@ class AdminController extends Controller
         ]);
         $admin->assignRole($request->input('roles'));
 
-        return redirect('admin')->with(['success'=>__('admin.add_is_complete')]);
+        return redirect('control_panel/admin')->with(['success'=>__('admin.add_is_complete')]);
     }
 
 
@@ -79,7 +85,7 @@ class AdminController extends Controller
             DB::table('model_has_roles')->where('model_id',$id)->delete();
             $admin->assignRole($request->input('roles'));
 
-            return redirect('admin')->with(['success'=>__('admin.edit_is_complete')]);
+            return redirect('control_panel/admin')->with(['success'=>__('admin.edit_is_complete')]);
         }
         else {
             return back();
@@ -92,6 +98,6 @@ class AdminController extends Controller
         $admin = admin::findOrFail($id);
 
         $admin->delete();
-        return redirect('admin')->with(['deleted'=>__('admin.delete_is_complete')]);
+        return redirect('control_panel/admin')->with(['deleted'=>__('admin.delete_is_complete')]);
     }
 }

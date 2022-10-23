@@ -31,6 +31,12 @@
         <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{URL('/design/admin')}}/dist/css/rtl/custom.css">
 
+        <style>
+            .card-title{
+                float: right;
+            }
+        </style>
+
     @elseif(LaravelLocalization::getCurrentLocale() == 'en')
         <!-- Theme style -->
         <link rel="stylesheet" href="{{URL('/design/admin')}}/dist/css/adminlte.min.css">
@@ -38,7 +44,7 @@
 
     @yield('style')
 </head>
-<body class="hold-transition sidebar-mini layout-fixed" >
+<body class="hold-transition sidebar-mini layout-fixed" rel="rtl"  lang="ar">
 
 
 

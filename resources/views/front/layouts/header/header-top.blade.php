@@ -2,79 +2,32 @@
     <div class="container">
         <div class="row">
             <div class="header-top-left col-lg-6 col-md-8 d-flex justify-content-start align-items-center">
-                <div id="_desktop_currency_selector" class="currency-selector groups-selector hidden-sm-down currentcy-selector-dropdown">
-                    <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="main">
-                        <span class="expand-more">GBP</span>
-                    </div>
-                    <div class="currency-list dropdown-menu">
-                        <div class="currency-list-content text-left">
-                            <div class="currency-item current flex-first">
-                                <a title="British Pound" rel="nofollow" href="https://demo.bestprestashoptheme.com/savemart/en/?SubmitCurrency=1&amp;id_currency=1">£ GBP</a>
-                            </div>
-                            <div class="currency-item">
-                                <a title="US Dollar" rel="nofollow" href="https://demo.bestprestashoptheme.com/savemart/en/?SubmitCurrency=1&amp;id_currency=2">$ USD</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
 
                 <div id="_desktop_language_selector" class="language-selector groups-selector hidden-sm-down language-selector-dropdown">
                     <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="main">
-                        <span class="expand-more"><img class="img-fluid" src="/savemart/img/l/1.jpg" alt="English" width="16" height="11"/></span>
+                        <span class="expand-more"><img class="img-fluid" src="{{URL('design/front/images/flags/'). '/'.LaravelLocalization::getCurrentLocale().'.jpg'}}" alt="English" width="16" height="11"/></span>
                     </div>
                     <div class="language-list dropdown-menu">
                         <div class="language-list-content text-left">
-                            <div class="language-item current flex-first">
-                                <div  class="current"  >
-                                    <a href="https://demo.bestprestashoptheme.com/savemart/en/">
-                                        <img class="img-fluid" src="/savemart/img/l/1.jpg" alt="English" width="16" height="11"/>
-                                        <span>English</span>
-                                    </a>
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <div class="language-item ">
+                                    <div  class="current"  >
+                                        <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                            <img class="img-fluid" src="{{URL('design/front/images/flags/'). '/'.$localeCode.'.jpg'}}" alt="{{$localeCode =='ar' ?'عربي':'English'}}" width="16" height="11"/>
+                                            <span>
+                                                @if($localeCode == 'ar')
+                                                    اللغة العربية
+                                                @else
+                                                    English
+                                                @endif
+
+                                            </span>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="language-item">
-                                <div  >
-                                    <a href="https://demo.bestprestashoptheme.com/savemart/fr/">
-                                        <img class="img-fluid" src="/savemart/img/l/2.jpg" alt="Français" width="16" height="11"/>
-                                        <span>Français</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="language-item">
-                                <div  >
-                                    <a href="https://demo.bestprestashoptheme.com/savemart/es/">
-                                        <img class="img-fluid" src="/savemart/img/l/3.jpg" alt="Español" width="16" height="11"/>
-                                        <span>Español</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="language-item">
-                                <div  >
-                                    <a href="https://demo.bestprestashoptheme.com/savemart/it/">
-                                        <img class="img-fluid" src="/savemart/img/l/4.jpg" alt="Italiano" width="16" height="11"/>
-                                        <span>Italiano</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="language-item">
-                                <div  >
-                                    <a href="https://demo.bestprestashoptheme.com/savemart/pl/">
-                                        <img class="img-fluid" src="/savemart/img/l/5.jpg" alt="Polski" width="16" height="11"/>
-                                        <span>Polski</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="language-item">
-                                <div  >
-                                    <a href="https://demo.bestprestashoptheme.com/savemart/ar/">
-                                        <img class="img-fluid" src="/savemart/img/l/6.jpg" alt="اللغة العربية" width="16" height="11"/>
-                                        <span>اللغة العربية</span>
-                                    </a>
-                                </div>
-                            </div>
+                            @endforeach
+
+
                         </div>
                     </div>
                 </div>
@@ -83,24 +36,38 @@
                     <i class="icon-email"></i>
                     <p>Email :  </p>
                     <span>
-              support@gmail.com
+              {{Setting::get('default_email_address')}}
             </span>
                 </div>
                 <div class="detail-call d-flex align-items-center justify-content-center">
                     <i class="icon-deal"></i>
-                    <p>Today Deals </p>
+                    <p>{{__('front.Today Deals')}}</p>
                 </div>
             </div>
             <div class="col-lg-6 col-md-4 d-flex justify-content-end align-items-center header-top-right">
-                <div class="register-out">
-                    <i class="zmdi zmdi-account"></i>
-                    <a class="register" href="https://demo.bestprestashoptheme.com/savemart/en/login?create_account=1" data-link-action="display-register-form">
-                        Register
-                    </a>
-                    <span class="or-text">or</span>
-                    <a class="login" href="https://demo.bestprestashoptheme.com/savemart/en/my-account" rel="nofollow" title="Log in to your customer account">Sign in</a>
-                </div>
+                @guest
+                    <div class="register-out">
+                        <i class="zmdi zmdi-account"></i>
+                        <a class="register" href="{{route('register')}}" data-link-action="display-register-form">
+                            {{__('front.Register')}}
+                        </a>
+                        <span class="or-text">{{__('front.or')}}</span>
+                        <a class="login" href="{{route('login')}}" rel="nofollow" title="Log in to your customer account">{{__('front.Sign in')}}</a>
+                    </div>
+
+                @endguest
+                    <div class="register-sign">
+                        @auth
+                            <a class="account" href="{{route('profile')}}" title="View my customer account" rel="nofollow"><span>{{Auth::user()->name}}</span></a>
+                            <form method="post" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="logout" style="border:none; background: none;  color: inherit; font: inherit;cursor: pointer;"   rel="nofollow" title="Log me out">{{__('front.Sign out')}}</button>
+                            </form>
+
+                        @endauth
+                    </div>
             </div>
+
         </div>
     </div>
 </div>

@@ -5,6 +5,10 @@
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="{{URL('/design/admin')}}/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    </div>
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -15,7 +19,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">{{__('admin.Home')}}</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('control_panel')}}">{{__('admin.Home')}}</a></li>
                         <li class="breadcrumb-item active">@yield('page')</li>
                     </ol>
                 </div><!-- /.col -->
@@ -37,3 +41,16 @@
 
 @include('admin.layouts.footer')
 @yield('script')
+
+<script>
+    $(function (){
+        $('#darkmode').change(function (e){
+            e.preventDefault()
+            if(this.checked) {
+               $('body').addClass('dark-mode')
+            }else{
+                $('body').removeClass('dark-mode')
+            }
+        })
+    })
+</script>

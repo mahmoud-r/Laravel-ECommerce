@@ -18,9 +18,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @can('brand-create')
                         <div class="card-header">
                             <button type="button" class="btn btn-block btn-primary w-25 "data-toggle="modal" data-target="#addcategorie">{{__('admin.add')}}</button>
                         </div>
+                        @endcan
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
@@ -36,7 +38,7 @@
 
                                     @foreach($brands as $i=>$brand)
                                         <tr>
-                                        <td>{{++$i}}}</td>
+                                        <td>{{++$i}}</td>
                                         <td>{{$brand->name}}</td>
                                         <td>
                                             @if(!empty($brand->image))
@@ -47,15 +49,16 @@
                                             @endif
                                         </td>
                                         <td>
-
+                                            @can('brand-edit')
                                             <a href="{{route('brand.edit',$brand->id)}}" class="btn btn-info btn-sm"> {{__('admin.Edit')}}</a>
-
+                                            @endcan
+                                            @can('brand-edit')
                                             <form action="{{route('brand.destroy',$brand->id)}}" method="post" class="d-inline">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger btn-sm "> {{__('admin.delete')}}</button>
                                             </form>
-
+                                                @endcan
                                         </td>
                                         </tr>
                                     @endforeach

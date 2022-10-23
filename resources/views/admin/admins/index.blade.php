@@ -18,9 +18,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @can('admin-create')
                         <div class="card-header">
                             <button type="button" class="btn btn-block btn-primary w-25 "data-toggle="modal" data-target="#exampleModalCenter">{{__('admin.add')}}</button>
                         </div>
+                        @endcan
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
@@ -48,13 +50,16 @@
                                                 @endif
                                             </td>
                                         <td>
+                                            @can('admin-edit')
                                             <a href="{{route('admin.edit',$admin->id)}}" class="btn btn-info btn-sm"> <i class="fas fa-pencil-alt"></i> </a>
-                                            <form action="{{route('admin.destroy',$admin->id)}}" method="post" class="d-inline">
+                                            @endcan
+                                            @can('admin-delete')
+                                                <form action="{{route('admin.destroy',$admin->id)}}" method="post" class="d-inline">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger btn-sm "> <i class="fas fa-trash"></i></button>
                                             </form>
-
+                                                @endcan
                                         </td>
                                         </tr>
                                     @endforeach

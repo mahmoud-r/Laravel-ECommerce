@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class CreateAdminUserSeeder extends Seeder
+class   CreateAdminUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -23,7 +23,7 @@ class CreateAdminUserSeeder extends Seeder
             'password' => bcrypt('123456')
         ]);
 
-        $role = Role::create(['name' => 'Admin']);
+        $role = Role::create(['guard_name' => 'admin','name' => 'Admin']);
 
         $permissions = Permission::pluck('id','id')->all();
 

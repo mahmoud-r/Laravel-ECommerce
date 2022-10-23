@@ -25,9 +25,17 @@
 
         <div class="form-group mb-1">
             <label for="exampleInputText">{{__('admin.name')}}</label>
-            <input type="text" name="name" value="{{$sub_categorie->name}}" class="form-control " placeholder="{{__('admin.name')}}">
+            <input type="text" name="name" value="{{$sub_categorie->getTranslation('name' ,'en')}}" class="form-control " placeholder="{{__('admin.name')}}">
         </div>
         @error('name')
+        <div class="text-danger mb-3 ">{{ $message }}</div>
+        @enderror
+
+        <div class="form-group mb-1">
+            <label for="exampleInputText">{{__('admin.name_ar')}}</label>
+            <input type="text" name="name_ar" value="{{$sub_categorie->getTranslation('name' ,'ar')}}" class="form-control " placeholder="{{__('admin.name_ar')}}">
+        </div>
+        @error('name_ar')
         <div class="text-danger mb-3 ">{{ $message }}</div>
         @enderror
 

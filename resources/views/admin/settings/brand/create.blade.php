@@ -1,4 +1,5 @@
 <!-- Modal -->
+@can('brand-create')
 <div class="modal fade" id="addcategorie" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -17,6 +18,14 @@
                         <input type="text" name="name" class="form-control " placeholder="{{__('admin.name')}}">
                     </div>
                     @error('name')
+                    <div class="text-danger mb-3 ">{{ $message }}</div>
+                    @enderror
+
+                    <div class="form-group mb-1">
+                        <label for="exampleInputText">{{__('admin.name_ar')}}</label>
+                        <input type="text" name="name_ar" class="form-control " placeholder="{{__('admin.name_ar')}}">
+                    </div>
+                    @error('name_ar')
                     <div class="text-danger mb-3 ">{{ $message }}</div>
                     @enderror
 
@@ -40,3 +49,4 @@
         </div>
     </div>
 </div>
+@endcan
