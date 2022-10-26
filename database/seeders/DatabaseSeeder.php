@@ -18,12 +18,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
-//            PermissionTableSeeder::class,
-//            CreateAdminUserSeeder::class,
-//            CreateStatusSeeder::class,
-//            CreateHomeSliderSeeder::class,
-//            CreateBannerSedder::class,
-                SettingsTableSeeder::class,
+            PermissionTableSeeder::class,
+            CreateAdminUserSeeder::class,
+            CreateStatusSeeder::class,
+            CreateHomeSliderSeeder::class,
+            CreateBannerSedder::class,
+            SettingsTableSeeder::class,
         ]);
 
 //        \App\Models\Categorie::factory(5)->create();

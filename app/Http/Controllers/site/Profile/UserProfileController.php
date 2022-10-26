@@ -13,11 +13,11 @@ class UserProfileController extends Controller
 {
     public function index(){
 
-        return view('front.profile.profile');
+        return view('front.Profile.profile');
     }
     public function Information(){
 
-        return view('front.profile.information');
+        return view('front.Profile.information');
     }
     public function InformationUpdate(Request $request){
         $user =Auth::user();

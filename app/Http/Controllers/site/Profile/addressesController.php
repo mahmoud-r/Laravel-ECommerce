@@ -56,7 +56,7 @@ class addressesController extends Controller
     public function edit($id)
     {
         $address= Addresses::where('user_id',Auth::user()->id)->where('id',$id)->first();
-        return view('front.profile.addresses.edit',compact('address'));
+        return view('front.Profile.addresses.edit',compact('address'));
     }
 
 

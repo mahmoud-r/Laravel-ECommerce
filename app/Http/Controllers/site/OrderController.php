@@ -56,7 +56,7 @@ class OrderController extends Controller
         $shipping_method = $request->shipping_method;
         $addresses = Addresses::where('user_id', Auth::user()->id)->get();
 
-        return view('front.order.payment', compact('selected_address', 'shipping_method', 'addresses'));
+        return view('front.order.Payment', compact('selected_address', 'shipping_method', 'addresses'));
     }
 
     public function CreateOrder(Request $request)

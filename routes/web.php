@@ -101,10 +101,7 @@ Route::group([
     Auth::routes(['verify' => true]);
 });
 
-Route::get('/test',function (){
 
-   return view('front.pages.contactUs');
-});
 
 
 

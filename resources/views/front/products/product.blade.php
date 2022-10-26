@@ -273,7 +273,7 @@
                                                 @endif
                                                 <a class="open-comment-form" data-toggle="modal"
                                                    data-target="#new_comment_form" href="#"><i class="fa fa-edit"></i>
-                                                    {{__('front. Write your review')}}
+                                                    {{__('front.Write your review !')}}
                                                 </a>
                                             </div>
                                         </div>

@@ -80,6 +80,7 @@ return [
         'Description'=>'Description',
         'Write Your Own Review'=>'Write Your Own Review',
         'Write your review !'=>'Write your review !',
+        'WRITE YOUR REVIEW'=>'WRITE YOUR REVIEW',
         'Be the first to write your review !'=>'Be the first to write your review !',
         'Free Delivery'=>'Free Delivery',
         'From $ 250'=>'From 250 LE',

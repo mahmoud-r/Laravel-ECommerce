@@ -17,7 +17,7 @@ class DashboardController extends Controller
        $totalUsers = User::get()->count();
         $ThisMonthsSales=order::where('status_id',5)->whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))->sum('total');
 
-        return view('admin.Dashboard',compact([
+        return view('admin.dashboard',compact([
             'totalOrders',
             'totalUsers',
             'ThisMonthsSales',
